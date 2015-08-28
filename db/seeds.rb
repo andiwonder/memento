@@ -14,10 +14,8 @@ user4= User.create(name: 'Neil', email:'n12@gmail.com',password: "123")
 
 
 
-event1 = Event.create(title: 'jets', description: "vs giants" , logo:"1.jpeg",date:"8/1/2015")
-event2 = Event.create(title: 'jets', description: "vs dolphins" , logo:"1.jpeg",date:"8/1/2015")
-event3 = Event.create(title: 'jets', description: "vs patriots" , logo:"1.jpeg",date:"8/1/2015")
-event4 = Event.create(title: 'jets', description: "vs cowboys" , logo:"1.jpeg",date:"8/1/2015")
-event5 = Event.create(title: 'jets', description: "vs bills" , logo:"1.jpeg",date:"8/1/2015")
-
-
+event1 = Event.create(title: 'jets', description: "vs giants" , logo:"1.jpeg",event_date:"8/1/2015")
+event2 = Event.create(title: 'jets', description: "vs dolphins" , logo:"1.jpeg",event_date:"8/1/2015")
+event3 = Event.create(title: 'jets', description: "vs patriots" , logo:"1.jpeg",event_date:"8/1/2015")
+event4 = Event.create(title: 'jets', description: "vs cowboys" , logo:"1.jpeg",event_date:"8/1/2015")
+event5 = Event.create(title: 'jets', description: "vs bills" , logo:"1.jpeg",event_date:"8/1/2015")
