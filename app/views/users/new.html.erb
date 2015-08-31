@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title> New User </title>
+</head>
+<body>
+  <h1> Thanks for signing up! You're well on your way to awesome events. </h1>
+
+  <%= form_for @user do |f| %>
+    Enter your email
+    <%= f.text_field :email %>
+    Enter a password
+    <%= f.password_field :password %>
+    <%= f.submit "create account" %>
+  <% end %>
+</body>
+</html>
