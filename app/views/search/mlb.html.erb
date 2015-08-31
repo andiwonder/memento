@@ -10,3 +10,11 @@
 
 <%= submit_tag %>
 <% end %>
+
+<% if @title %>
+	<% for x in 0.. @title.length-1 do %>
+		<a href = "/search/mlb/<%= @id[x] %>"> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li></a>
+		<img src = "<%= @image %>"></img ><img src = "<%= @final[x] %>"></img>
+	<% end %>
+<% end %>
+
