@@ -1,0 +1,12 @@
+<h1>Search MLB games near you!<h1>
+
+<%= form_tag("/search/mlb", method: "POST") do %>
+
+
+<select name = "mlb">
+<% @teams.each do |x| %>
+<option value = "<%= x %>"><%= x %> </option>
+<% end %>
+
+<%= submit_tag %>
+<% end %>

@@ -1,0 +1,12 @@
+<h1>Search NFL games near you!<h1>
+
+<%= form_tag("/search/nfl", method: "POST") do %>
+
+
+<select name = "nfl">
+<% @button.each do |x| %>
+<option value = "<%= x %>"><%= x %> </option>
+<% end %>
+
+<%= submit_tag %>
+<% end %>
