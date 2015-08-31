@@ -84,5 +84,40 @@ class SearchController < ApplicationController
 		render :show
 	end#mlb_search
 
+	def game
+	
+	end#game end
+
+	def game_search
+		@search = params[:name]
+    result = HTTParty.get('http://www.giantbomb.com/api/search/?api_key=9a1589bbea869535bbf2840478d5656d7d53eb5c&format=json&query=%22'+@search+'%22&resources=game',
+    headers:{
+        "X-Mashape-Key" => "fkL4Ay2aSUmshDSItLpIVOVLIs4Op1nS8LLjsnes8Ehvq9m825",
+        "Accept" => "text/plain"
+        })
+    array = []
+    list = result["results"]
+    list.each do |x|
+      year = x["expected_release_year"].to_s  
+      month = x["expected_release_month"].to_s
+      split = month.split("")
+      if split.length < 2 
+        split = split.unshift("0")
+      end
+      joined = split.join("")
+      date = (year + split.join("")).to_i
+      if date > 201508
+        array.push(x)
+      end
+    end
+		@games = array
+    render :show_game
+	end#game_search end
+
+	def game_add
+		#Game.create({title: params[:title], description: params[:description], date: params[:date], pic: params[:pic]})
+    #redirect_to '/'   -calendar page
+	end#game_add end
+
 
 end#controller end

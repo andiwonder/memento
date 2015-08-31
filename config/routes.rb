@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   post '/search/nfl' => 'search#nfl_search'
   get '/search/mlb' => 'search#mlb'
   post '/search/mlb' => 'search#mlb_search'
+  get '/search/game' => 'search#game'
+  get '/search/gameresults' => 'search#game_search'
+  post '/search/gameresults' => 'search#game_add'
+
 
   resources :users
   
