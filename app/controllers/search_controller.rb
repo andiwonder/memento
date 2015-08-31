@@ -39,6 +39,7 @@ class SearchController < ApplicationController
 					end
 				end
 			end
+		@description = description
 		render :show
 	end#nfl_search end
 
@@ -79,6 +80,7 @@ class SearchController < ApplicationController
 		end
 		@event_date = @event_date.first(10)
 		@title = @title.first(10)
+		@description = description
 		render :show
 	end#mlb_search
 
