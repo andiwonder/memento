@@ -1,0 +1,18 @@
+<h1> Search results for <%= @search %> </h1>
+
+<% @games.each do |x| %>
+	<img src='<%= x["image"]["small_url"] %>'>
+	<h1> Title: <%= x["name"] %> </h1>
+	<p> Description: <%= x["deck"] %> </p>
+	<h3> Release date: <%= x["expected_release_month"] %>/<%= x["expected_release_day"] %>/<%= x["expected_release_year"] %></h3>
+
+	<form action='/search' method='POST'>
+		<input type='hidden' name='title' value='<%= x["name"] %>'>
+		<input type='hidden' name='description' value='<%= x["deck"] %>'>
+		<input type='hidden' name='date' value='<%= x["expected_release_month"] %>/<%= x["expected_release_day"] %>/<%= x["expected_release_year"] %>'>
+		<input type='hidden' name='pic' value='<%= x["image"]["small_url"] %>'>
+		<button>add</button>
+	</form>
+	<br><br><br>
+
+<% end %>

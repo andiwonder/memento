@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   post '/search/mlb' => 'search#mlb_search'
   get '/search/mlb/:id' => 'search#mlb_show'
   get '/search/nfl/:id' => 'search#nfl_show'
+  get '/search/game' => 'search#game'
+  get '/search/gameresults' => 'search#game_search'
+  post '/search/gameresults' => 'search#game_add'
 
   resources :users
   
