@@ -1,5 +1,21 @@
 class SearchController < ApplicationController
 
+	def movies
+		today = Time.new
+		year 	= today.year.to_s
+		month = sprintf '%02d', today.month
+		day 	= sprintf '%02d', today.day
+
+		movies = HTTParty.get("https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" +
+			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+		)
+		
+	end
+
+	def tv
+
+	end
+
 	def nfl
 		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
 		@button = []
