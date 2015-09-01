@@ -290,7 +290,7 @@ class SearchController < ApplicationController
 	end#game end
 
 	def game_search
-		@search = params[:name]
+    @search = params[:name]
     result = HTTParty.get('http://www.giantbomb.com/api/search/?api_key=9a1589bbea869535bbf2840478d5656d7d53eb5c&format=json&query=%22'+@search+'%22&resources=game',
     headers:{
         "X-Mashape-Key" => "fkL4Ay2aSUmshDSItLpIVOVLIs4Op1nS8LLjsnes8Ehvq9m825",
@@ -311,15 +311,24 @@ class SearchController < ApplicationController
         array.push(x)
       end
     end
-		@games = array
+    @games = array
+
     render :show_game
-	end#game_search end
+  end#game_search end
 
-	def game_add
-		#Game.create({title: params[:title], description: params[:description], date: params[:date], pic: params[:pic]})
-    #redirect_to '/'   -calendar page
-	end#game_add end
+  def game_add
+    a = params[:date].split("/")
+    array = []
+    a.each do |x|
+      array.push(x.to_i)
+    end
+    b = array.pop
+    date = array.unshift(b).join("-").to_date
 
+    Event.create({title: params[:title], description: params[:description], event_date: date, logo: params[:pic], event_type: "video game", unique_id: params[:unique_id]})
+    redirect_to '/search/game'  
+  end#game_add end
+  
 	private
 
 	def event_params

@@ -6,11 +6,13 @@
 	<p> Description: <%= x["deck"] %> </p>
 	<h3> Release date: <%= x["expected_release_month"] %>/<%= x["expected_release_day"] %>/<%= x["expected_release_year"] %></h3>
 
-	<form action='/search' method='POST'>
+	<form action='/search/gameresults' method='POST'>
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 		<input type='hidden' name='title' value='<%= x["name"] %>'>
 		<input type='hidden' name='description' value='<%= x["deck"] %>'>
 		<input type='hidden' name='date' value='<%= x["expected_release_month"] %>/<%= x["expected_release_day"] %>/<%= x["expected_release_year"] %>'>
 		<input type='hidden' name='pic' value='<%= x["image"]["small_url"] %>'>
+		<input type='hidden' name='unique_id' value='<%= x["id"]%>'>
 		<button>add</button>
 	</form>
 	<br><br><br>
