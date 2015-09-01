@@ -1,0 +1,10 @@
+<h1> Hey, these are some upcoming TV shows, so, yeah. </h1>
+
+<% @tv.each do |episode| %>
+  <%= episode.original_title %>
+  <%= episode.overview %>
+  <%= episode.backdrop_path %>
+  <%= episode.poster_path %>
+  <%= episode.release_date %>
+  <%= episode.popularity %>
+<% end %>

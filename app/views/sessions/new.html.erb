@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title> Login </title>
-</head>
-<body>
-  <h1> Log in for awesome events! </h1>
-  <%= form_tag "/sessions" do %>
-    Enter your email
-    <%= email_field_tag :email %>
-    Enter your password
-    <%= password_field_tag :password %>
-    <%= submit_tag "Login" %>
-  <% end %>
-</body>
-</html>
+<div class = "login_form">
+  <h1> Log in to check your events! </h1>
+    <%= form_tag("/sessions", method: "POST", class: "pure-form") do %>
+      <%= email_field_tag :email, "Email" %>
+      <%= password_field_tag :password, "Password" %>
+      <%= submit_tag "Login" %>
+    <% end %>
+  </body>
+  </html>
+</div>

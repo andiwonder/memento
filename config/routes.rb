@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/sessions/new' => 'sessions#new'
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'
+  
   get '/search/nfl' => 'search#nfl'
   post '/search/nfl' => 'search#nfl_search'
   get '/search/mlb' => 'search#mlb'
@@ -14,7 +15,18 @@ Rails.application.routes.draw do
   get '/search/game' => 'search#game'
   get '/search/gameresults' => 'search#game_search'
   post '/search/gameresults' => 'search#game_add'
+  post '/search/mlb_save' => 'search#event_save'
+  post '/search/nfl_save' => 'search#event_save'
+  post '/search/mlb_save' => 'search#mlb_save'
+  post '/search/nfl_save' => 'search#nfl_save'
 
+  get '/search/movies' => 'search#movies'
+  get '/search/tv' => 'search#tv'
+
+  post '/events' => 'events#new'
+  
   resources :users
+
+  # get ':id' => 'welcome#index'
   
 end

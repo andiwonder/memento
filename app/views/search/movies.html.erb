@@ -1,0 +1,10 @@
+<h1> Hey, these are some upcoming movies, so, yeah. </h1>
+
+<% @movies.each do |movie| %>
+  <%= movie.original_title %>
+  <%= movie.overview %>
+  <%= movie.backdrop_path %>
+  <%= movie.poster_path %>
+  <%= movie.release_date %>
+  <%= movie.popularity %>
+<% end %>

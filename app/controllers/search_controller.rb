@@ -1,14 +1,41 @@
 class SearchController < ApplicationController
 
-	def nfl
-		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
-		@button = []
-		for x in 0.. nfl["weeks"][0]["games"].length-1 do
-			@button.push(nfl["weeks"][0]["games"][x]["home"]["alias"])
-			@button.push(nfl["weeks"][0]["games"][x]["away"]["alias"])
-		end
-		@button = @button.sort
+	def movies
+		today = Time.new
+		year 	= today.year.to_s
+		month = sprintf '%02d', today.month
+		day 	= sprintf '%02d', today.day
 
+		movies = HTTParty.get("https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" +
+			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+		)
+		@movies = movies.results
+	end
+
+	def tv
+		today = Time.new
+		year 	= today.year.to_s
+		month = sprintf '%02d', today.month
+		day 	= sprintf '%02d', today.day
+
+		tv = HTTParty.get("https://api.themoviedb.org/3/discover/tv?air_date.gte=" +
+			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+		)
+		@tv = tv.results
+	end
+
+	def nfl
+		if logged_in?
+			nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
+			@button = []
+			for x in 0.. nfl["weeks"][0]["games"].length-1 do
+				@button.push(nfl["weeks"][0]["games"][x]["home"]["alias"])
+				@button.push(nfl["weeks"][0]["games"][x]["away"]["alias"])
+			end
+			@button = @button.sort
+		else
+			redirect_to root_path
+		end
 	end
 
 	def nfl_search
@@ -50,6 +77,8 @@ class SearchController < ApplicationController
 		@event_date = []
 		@id = []
 		@away_image =[]
+		@location = []
+		@description = []
 
 		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
 			nfl["weeks"].each do |x|
@@ -61,6 +90,7 @@ class SearchController < ApplicationController
 						puts event_date
 						if y["home"]["alias"] == params[:nfl]
 							description = "Vs The " + y["away"]["name"]
+							@description.push(description)
 							team = y["home"]["name"]
 							title = "The #{team} #{description}" + " At "+y["venue"]["name"]
 							@title.push(title)
@@ -68,8 +98,11 @@ class SearchController < ApplicationController
 							@id.push(id)
 							awayImg = y["away"]["alias"]
 							@away_image.push(awayImg)
+							location = y["venue"]["name"]
+							@location.push(location)
 						else
 							description = "At The " + y["home"]["name"]
+							@description.push(description)
 							team = y["away"]["name"]
 							title = "The #{team} #{description}" + " At "+y["venue"]["name"]
 							@title.push(title)
@@ -77,6 +110,8 @@ class SearchController < ApplicationController
 							@id.push(id)
 							awayImg = y["home"]["alias"]
 							@away_image.push(awayImg)
+							location = y["venue"]["name"]
+							@location.push(location)
 						end
 						puts description
 						puts title
@@ -102,14 +137,18 @@ class SearchController < ApplicationController
 	end#nfl_search end
 
 	def mlb
-		@teams = []
-		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=sg78ea9tjzv3va2qtrca4z4c")
-		mlb["league"]["season"]["games"].each do |x|
-			@teams.push(x["home"]["abbr"])
+		if logged_in?
+			@teams = []
+			mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=sg78ea9tjzv3va2qtrca4z4c")
+			mlb["league"]["season"]["games"].each do |x|
+				@teams.push(x["home"]["abbr"])
+			end
+			@teams = @teams.uniq
+			@teams.pop
+			@teams = @teams.sort
+		else
+			redirect_to root_path
 		end
-		@teams = @teams.uniq
-		@teams.pop
-		@teams = @teams.sort
 	end#mlb end
 
 	def mlb_search
@@ -141,7 +180,7 @@ class SearchController < ApplicationController
 			"SF" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/sf.png&h=150&w=150",
 			"STL" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/stl.png&h=150&w=150",
 			"TB" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tb.png&h=150&w=150",
-			"TX" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tex.png&h=150&w=150",
+			"TEX" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tex.png&h=150&w=150",
 			"TOR" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tor.png&h=150&w=150",
 			"WSH" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/wsh.png&h=150&w=150"
 		}
@@ -149,6 +188,8 @@ class SearchController < ApplicationController
 		@event_date = []
 		@id = []
 		@away_image =[]
+		@location = []
+		@description = []
 
 		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=sg78ea9tjzv3va2qtrca4z4c")
 		mlb["league"]["season"]["games"].each do |x|
@@ -158,6 +199,7 @@ class SearchController < ApplicationController
 				puts x["scheduled"]
 				if x["home"]["abbr"] == params[:mlb]
 					description = "Vs The " + x["away"]["market"] + " " + x["away"]["name"]
+					@description.push(description)
 					team = x["home"]["market"] + " " + x["home"]["name"]
 					title = "The #{team} #{description}" + " At " + x["venue"]["name"]
 					@title.push(title)
@@ -165,8 +207,11 @@ class SearchController < ApplicationController
 					@id.push(id)
 					awayImg = x["away"]["abbr"]
 					@away_image.push(awayImg)
+					location = x["venue"]["name"]
+					@location.push(location)
 				else 
 					description = "At The " + x["home"]["market"] + " " + x["home"]["name"]
+					@description.push(description)
 					team = x["away"]["market"] + " " + x["away"]["name"]
 					title = "The #{team} #{description}" + " At " + x["venue"]["name"]
 					@title.push(title)
@@ -174,6 +219,8 @@ class SearchController < ApplicationController
 					@id.push(id)
 					awayImg = x["home"]["abbr"]
 					@away_image.push(awayImg)
+					location = x["venue"]["name"]
+					@location.push(location)
 				end
 				puts description
 			end
@@ -184,10 +231,12 @@ class SearchController < ApplicationController
 			@final.push(mlb_logos[x])
 		end
 
+		@description = @description.first(10)
 		@final = @final.first(10)
 		@id = @id.first(10)
 		@event_date = @event_date.first(10)
 		@title = @title.first(10)
+		@location = @location.first(10)
 
 		@teams = []
 		mlb["league"]["season"]["games"].each do |x|
@@ -225,8 +274,21 @@ class SearchController < ApplicationController
 					end
 				end
 			end
-	
+	end
 
+	def event_save
+		event = Event.new(event_params)
+		if Event.find_by(unique_id: event[:unique_id])
+			event = Event.find_by(unique_id: event[:unique_id])
+		else
+			event = Event.create(event_params)
+		end
+		user = User.find(session[:user_id])
+
+		unless user.events.find_by(unique_id: event[:unique_id])
+			user.events << event
+		end
+		redirect_to user_path(user)
 	end
 
 	def game
@@ -234,7 +296,7 @@ class SearchController < ApplicationController
 	end#game end
 
 	def game_search
-		@search = params[:name]
+    @search = params[:name]
     result = HTTParty.get('http://www.giantbomb.com/api/search/?api_key=9a1589bbea869535bbf2840478d5656d7d53eb5c&format=json&query=%22'+@search+'%22&resources=game',
     headers:{
         "X-Mashape-Key" => "fkL4Ay2aSUmshDSItLpIVOVLIs4Op1nS8LLjsnes8Ehvq9m825",
@@ -255,14 +317,29 @@ class SearchController < ApplicationController
         array.push(x)
       end
     end
-		@games = array
+    @games = array
+
     render :show_game
-	end#game_search end
+  end#game_search end
 
-	def game_add
-		#Game.create({title: params[:title], description: params[:description], date: params[:date], pic: params[:pic]})
-    #redirect_to '/'   -calendar page
-	end#game_add end
+  def game_add
+    a = params[:date].split("/")
+    array = []
+    a.each do |x|
+      array.push(x.to_i)
+    end
+    b = array.pop
+    date = array.unshift(b).join("-").to_date
 
+   event_params = ({title: params[:title], description: params[:description], event_date: date, logo: params[:pic], event_type: "video game", unique_id: params[:unique_id]})
+   self.event_save
+    # redirect_to '/search/game'  
+  end#game_add end
+  
+	private
+
+	def event_params
+    params.permit(:title, :description, :logo, :event_date, :event_type, :location, :unique_id) 
+  end
 
 end#controller end

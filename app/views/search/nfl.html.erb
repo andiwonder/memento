@@ -1,19 +1,39 @@
-<h1>Search NFL games near you!<h1>
+<div class = "nfl">
 
-<%= form_tag("/search/nfl", method: "POST") do %>
+	<h1 class = "sports_header">Search NFL games of your favorite team!<h1>
+
+	<%= form_tag("/search/nfl", method: "POST", class: "button-xsmall pure-button") do %>
 
 
-<select name = "nfl">
-<% @button.each do |x| %>
-<option value = "<%= x %>"><%= x %> </option>
-<% end %>
-
-<%= submit_tag %>
-<% end %>
-
-<% if @title %>
-	<% for x in 0.. @title.length-1 do %>
-		<a href = "/search/nfl/<%= @id[x] %>"> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li></a>
-		<img src = "<%= @image %>"></img><img src = "<%= @final[x] %>"></img>
+	<select name = "nfl">
+	<% @button.each do |x| %>
+	<option value = "<%= x %>"><%= x %> </option>
 	<% end %>
-<% end %>
+
+	<%= submit_tag("Search") %>
+	<% end %>
+
+	<div class = "results_div">
+
+	<% if @title %>
+		<% for x in 0.. @title.length-1 do %>
+<!-- 			<a href = "/search/nfl/<%= @id[x] %>"> --> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li><!-- </a> -->
+			<img src = "<%= @image %>" style = "	margin: 10px"></img><img src = "<%= @final[x] %>" style = "	margin: 10px"></img>
+			<%= form_tag("/search/nfl_save", method: "POST") do %>
+			<%= hidden_field_tag :title, @title[x] %>
+			<%= hidden_field_tag :description, @description[x] %>
+			<%= hidden_field_tag :logo, @image %>
+			<%= hidden_field_tag :event_date, @event_date[x] %>
+			<%= hidden_field_tag :event_type, "sports" %>
+			<%= hidden_field_tag :location, @location[x] %>
+			<%= hidden_field_tag :unique_id, @id[x] %>						
+			<%= submit_tag("Save", class: "button-small pure-button")%>
+			<% end %>
+		<% end %>
+	<% end %>
+
+	</div>
+
+
+
+</div>
