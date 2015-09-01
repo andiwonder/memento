@@ -325,8 +325,9 @@ class SearchController < ApplicationController
     b = array.pop
     date = array.unshift(b).join("-").to_date
 
-    Event.create({title: params[:title], description: params[:description], event_date: date, logo: params[:pic], event_type: "video game", unique_id: params[:unique_id]})
-    redirect_to '/search/game'  
+   event_params = ({title: params[:title], description: params[:description], event_date: date, logo: params[:pic], event_type: "video game", unique_id: params[:unique_id]})
+   self.event_save
+    # redirect_to '/search/game'  
   end#game_add end
   
 	private
