@@ -8,7 +8,6 @@ class SearchController < ApplicationController
 			@button.push(nfl["weeks"][0]["games"][x]["away"]["alias"])
 		end
 		@button = @button.sort
-
 	end
 
 	def nfl_search
@@ -302,6 +301,5 @@ class SearchController < ApplicationController
 	def event_params
     params.permit(:title, :description, :logo, :event_date, :event_type, :location, :unique_id) 
   end
-
 
 end#controller end
