@@ -1,0 +1,35 @@
+.button-xsmall {
+	font-size: 8px;
+	margin-left: 10px;
+}
+
+.button-small {
+	font-size: 12px;
+}
+
+.sports_header {
+	text-align: center;
+	font-family: "Comic Sans MS";
+	color: #526F35;
+}
+
+.results_div {
+	text-align: center;
+	color: #526F35;
+}
+
+.matchup_image {
+	margin: 10px;
+	height: 50px%;
+	width: 50px;
+}
+
+.mlb {
+	background-image: url("http://i139.photobucket.com/albums/q291/futuremet2b/mlbwallpaper2.jpg");
+	background-size: fill;
+}
+
+.nfl {
+	background-image: url("http://i838.photobucket.com/albums/zz302/NFLWallpaperZone/nfl-wallpaper-logo.jpg");
+	background-size: fill;
+}

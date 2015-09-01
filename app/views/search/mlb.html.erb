@@ -1,29 +1,38 @@
-<h1>Search MLB games near you!<h1>
+	<div class = "mlb">
 
-<%= form_tag("/search/mlb", method: "POST") do %>
+	<h1 class = "sports_header">Search MLB games of your favorite team!<h1>
 
+	<%= form_tag("/search/mlb", method: "POST", class: "button-xsmall pure-button") do %>
+		<select name = "mlb">
+		<% @teams.each do |x| %>
+		<option value = "<%= x %>"><%= x %> </option>
+		<% end %>
+		<%= submit_tag("Search") %>
+	<% end %>
 
-<select name = "mlb">
-<% @teams.each do |x| %>
-<option value = "<%= x %>"><%= x %> </option>
-<% end %>
+	<div class = "results_div">
 
-<%= submit_tag("Search") %>
-<% end %>
+	<% if @title %>
+		<% for x in 0.. @title.length-1 do %>
+			
+			<div class = "each_result">
+<!-- 				<a href = "/search/mlb/<%= @id[x] %>">  --><li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li><!-- </a> -->
+				<img src = "<%= @image %>" class = "matchup_image"></img ><img src = "<%= @final[x] %>" class = "matchup_image"></img>
+				<%= form_tag("/search/mlb_save", method: "POST") do %>
+				<%= hidden_field_tag :title, @title[x] %>
+				<%= hidden_field_tag :description, @description[x] %>
+				<%= hidden_field_tag :logo, @image %>
+				<%= hidden_field_tag :event_date, @event_date[x] %>
+				<%= hidden_field_tag :event_type, "sports" %>
+				<%= hidden_field_tag :location, @location[x] %>
+				<%= hidden_field_tag :unique_id, @id[x] %>						
+				<%= submit_tag("Save", class: "button-small pure-button")%>
+				<% end %>
 
-<% if @title %>
-	<% for x in 0.. @title.length-1 do %>
-		<a href = "/search/mlb/<%= @id[x] %>"> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li></a>
-		<img src = "<%= @image %>"></img ><img src = "<%= @final[x] %>"></img>
-		<%= form_tag("/search/mlb_save", method: "POST") do %>
-		<%= hidden_field_tag :title, @title[x] %>
-		<%= hidden_field_tag :description, @description[x] %>
-		<%= hidden_field_tag :logo, @image %>
-		<%= hidden_field_tag :event_date, @event_date[x] %>
-		<%= hidden_field_tag :event_type, "sports" %>
-		<%= hidden_field_tag :location, @location[x] %>
-		<%= hidden_field_tag :unique_id, @id[x] %>						
-		<%= submit_tag("Save")%>
+			</div>
 		<% end %>
 	<% end %>
-<% end %>
+
+		</div>
+
+</div>

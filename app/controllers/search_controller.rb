@@ -25,13 +25,17 @@ class SearchController < ApplicationController
 	end
 
 	def nfl
-		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
-		@button = []
-		for x in 0.. nfl["weeks"][0]["games"].length-1 do
-			@button.push(nfl["weeks"][0]["games"][x]["home"]["alias"])
-			@button.push(nfl["weeks"][0]["games"][x]["away"]["alias"])
+		if logged_in?
+			nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
+			@button = []
+			for x in 0.. nfl["weeks"][0]["games"].length-1 do
+				@button.push(nfl["weeks"][0]["games"][x]["home"]["alias"])
+				@button.push(nfl["weeks"][0]["games"][x]["away"]["alias"])
+			end
+			@button = @button.sort
+		else
+			redirect_to root_path
 		end
-		@button = @button.sort
 	end
 
 	def nfl_search
@@ -133,14 +137,18 @@ class SearchController < ApplicationController
 	end#nfl_search end
 
 	def mlb
-		@teams = []
-		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=sg78ea9tjzv3va2qtrca4z4c")
-		mlb["league"]["season"]["games"].each do |x|
-			@teams.push(x["home"]["abbr"])
+		if logged_in?
+			@teams = []
+			mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=sg78ea9tjzv3va2qtrca4z4c")
+			mlb["league"]["season"]["games"].each do |x|
+				@teams.push(x["home"]["abbr"])
+			end
+			@teams = @teams.uniq
+			@teams.pop
+			@teams = @teams.sort
+		else
+			redirect_to root_path
 		end
-		@teams = @teams.uniq
-		@teams.pop
-		@teams = @teams.sort
 	end#mlb end
 
 	def mlb_search
@@ -172,7 +180,7 @@ class SearchController < ApplicationController
 			"SF" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/sf.png&h=150&w=150",
 			"STL" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/stl.png&h=150&w=150",
 			"TB" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tb.png&h=150&w=150",
-			"TX" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tex.png&h=150&w=150",
+			"TEX" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tex.png&h=150&w=150",
 			"TOR" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/tor.png&h=150&w=150",
 			"WSH" => "http://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/wsh.png&h=150&w=150"
 		}
