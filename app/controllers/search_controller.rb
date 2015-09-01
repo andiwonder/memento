@@ -247,27 +247,12 @@ class SearchController < ApplicationController
 
 	end
 
-	def mlb_save
-		event = Event.new(sports_params)
+	def event_save
+		event = Event.new(event_params)
 		if Event.find_by(unique_id: event[:unique_id])
 			event = Event.find_by(unique_id: event[:unique_id])
 		else
-			event = Event.create(sports_params)
-		end
-		user = User.find(session[:user_id])
-
-		unless user.events.find_by(unique_id: event[:unique_id])
-			user.events << event
-		end
-		redirect_to user_path(user)
-	end
-
-	def nfl_save
-		event = Event.new(sports_params)
-		if Event.find_by(unique_id: event[:unique_id])
-			event = Event.find_by(unique_id: event[:unique_id])
-		else
-			event = Event.create(sports_params)
+			event = Event.create(event_params)
 		end
 		user = User.find(session[:user_id])
 
@@ -314,7 +299,7 @@ class SearchController < ApplicationController
 
 	private
 
-	def sports_params
+	def event_params
     params.permit(:title, :description, :logo, :event_date, :event_type, :location, :unique_id) 
   end
 
