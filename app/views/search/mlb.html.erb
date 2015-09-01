@@ -1,0 +1,20 @@
+<h1>Search MLB games near you!<h1>
+
+<%= form_tag("/search/mlb", method: "POST") do %>
+
+
+<select name = "mlb">
+<% @teams.each do |x| %>
+<option value = "<%= x %>"><%= x %> </option>
+<% end %>
+
+<%= submit_tag %>
+<% end %>
+
+<% if @title %>
+	<% for x in 0.. @title.length-1 do %>
+		<a href = "/search/mlb/<%= @id[x] %>"> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li></a>
+		<img src = "<%= @image %>"></img ><img src = "<%= @final[x] %>"></img>
+	<% end %>
+<% end %>
+

@@ -19,3 +19,6 @@ event2 = Event.create(title: 'jets', description: "vs dolphins" , logo:"1.jpeg",
 event3 = Event.create(title: 'jets', description: "vs patriots" , logo:"1.jpeg",event_date:"8/1/2015")
 event4 = Event.create(title: 'jets', description: "vs cowboys" , logo:"1.jpeg",event_date:"8/1/2015")
 event5 = Event.create(title: 'jets', description: "vs bills" , logo:"1.jpeg",event_date:"8/1/2015")
+
+
+event1.users << user1
