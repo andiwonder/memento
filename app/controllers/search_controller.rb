@@ -149,6 +149,8 @@ class SearchController < ApplicationController
 		@event_date = []
 		@id = []
 		@away_image =[]
+		@location = []
+		@description = []
 
 		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=sg78ea9tjzv3va2qtrca4z4c")
 		mlb["league"]["season"]["games"].each do |x|
@@ -158,6 +160,7 @@ class SearchController < ApplicationController
 				puts x["scheduled"]
 				if x["home"]["abbr"] == params[:mlb]
 					description = "Vs The " + x["away"]["market"] + " " + x["away"]["name"]
+					@description.push(description)
 					team = x["home"]["market"] + " " + x["home"]["name"]
 					title = "The #{team} #{description}" + " At " + x["venue"]["name"]
 					@title.push(title)
@@ -165,8 +168,11 @@ class SearchController < ApplicationController
 					@id.push(id)
 					awayImg = x["away"]["abbr"]
 					@away_image.push(awayImg)
+					location = x["venue"]["name"]
+					@location.push(location)
 				else 
 					description = "At The " + x["home"]["market"] + " " + x["home"]["name"]
+					@description.push(description)
 					team = x["away"]["market"] + " " + x["away"]["name"]
 					title = "The #{team} #{description}" + " At " + x["venue"]["name"]
 					@title.push(title)
@@ -174,6 +180,8 @@ class SearchController < ApplicationController
 					@id.push(id)
 					awayImg = x["home"]["abbr"]
 					@away_image.push(awayImg)
+					location = x["venue"]["name"]
+					@location.push(location)
 				end
 				puts description
 			end
@@ -184,10 +192,12 @@ class SearchController < ApplicationController
 			@final.push(mlb_logos[x])
 		end
 
+		@description = @description.first(10)
 		@final = @final.first(10)
 		@id = @id.first(10)
 		@event_date = @event_date.first(10)
 		@title = @title.first(10)
+		@location = @location.first(10)
 
 		@teams = []
 		mlb["league"]["season"]["games"].each do |x|
@@ -230,7 +240,9 @@ class SearchController < ApplicationController
 	end
 
 	def mlb_save
-		#Event.create({})
+		binding.pry
+		Event.create(mlb_params)
+		redirect_to ('/search/mlb')
 	end
 
 	def game
@@ -267,6 +279,12 @@ class SearchController < ApplicationController
 		#Game.create({title: params[:title], description: params[:description], date: params[:date], pic: params[:pic]})
     #redirect_to '/'   -calendar page
 	end#game_add end
+
+	private
+
+	def mlb_params
+		params.permit(:title, :description, :logo, :event_date, :type, :location, :unique_id) 
+	end
 
 
 end#controller end
