@@ -240,7 +240,6 @@ class SearchController < ApplicationController
 	end
 
 	def mlb_save
-		binding.pry
 		Event.create(mlb_params)
 		redirect_to ('/search/mlb')
 	end
@@ -283,8 +282,8 @@ class SearchController < ApplicationController
 	private
 
 	def mlb_params
-		params.permit(:title, :description, :logo, :event_date, :type, :location, :unique_id) 
-	end
+    params.permit(:title, :description, :logo, :event_date, :event_type, :location, :unique_id) 
+  end
 
 
 end#controller end

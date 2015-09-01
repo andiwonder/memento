@@ -16,13 +16,14 @@
 		<a href = "/search/mlb/<%= @id[x] %>"> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li></a>
 		<img src = "<%= @image %>"></img ><img src = "<%= @final[x] %>"></img>
 		<%= form_tag("/search/mlb_save", method: "POST") do %>
-		<%= hidden_field_tag :title, "<%= @title[x] %>" %>
-		<%= hidden_field_tag :description, "<%= @description[x] %>" %>
-		<%= hidden_field_tag :logo, "<%= @image %>" %>
-		<%= hidden_field_tag :event_date, "<%= @event_date[x] %>" %>
-		<%= hidden_field_tag :type, "sports" %>
-		<%= hidden_field_tag :location, "<%= @location[x] %>" %>
-		<%= hidden_field_tag :unique_id, "<%= @id[x] %>" %>						
-		<%= submit_tag("Save")%><% end %>
+		<%= hidden_field_tag :title, @title[x] %>
+		<%= hidden_field_tag :description, @description[x] %>
+		<%= hidden_field_tag :logo, @image %>
+		<%= hidden_field_tag :event_date, @event_date[x] %>
+		<%= hidden_field_tag :event_type, "sports" %>
+		<%= hidden_field_tag :location, @location[x] %>
+		<%= hidden_field_tag :unique_id, @id[x] %>						
+		<%= submit_tag("Save")%>
+		<% end %>
 	<% end %>
 <% end %>

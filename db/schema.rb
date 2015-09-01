@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150901135306) do
     t.string "description"
     t.string "logo"
     t.date   "event_date"
-    t.string "type"
+    t.string "event_type"
     t.string "location"
     t.string "unique_id"
   end
