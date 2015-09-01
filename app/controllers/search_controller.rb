@@ -274,8 +274,6 @@ class SearchController < ApplicationController
 					end
 				end
 			end
-	
-
 	end
 
 	def event_save

@@ -26,5 +26,7 @@ Rails.application.routes.draw do
   post '/events' => 'events#new'
   
   resources :users
+
+  # get ':id' => 'welcome#index'
   
 end
