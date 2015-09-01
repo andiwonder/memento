@@ -13,7 +13,15 @@ class SearchController < ApplicationController
 	end
 
 	def tv
+		today = Time.new
+		year 	= today.year.to_s
+		month = sprintf '%02d', today.month
+		day 	= sprintf '%02d', today.day
 
+		movies = HTTParty.get("https://api.themoviedb.org/3/discover/tv?air_date.gte=" +
+			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+		)
+		
 	end
 
 	def nfl
