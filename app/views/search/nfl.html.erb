@@ -8,12 +8,12 @@
 <option value = "<%= x %>"><%= x %> </option>
 <% end %>
 
-<%= submit_tag %>
+<%= submit_tag("Search") %>
 <% end %>
 
 <% if @title %>
 	<% for x in 0.. @title.length-1 do %>
 		<a href = "/search/nfl/<%= @id[x] %>"> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li></a>
-		<img src = "<%= @image %>"></img><img src = "<%= @final[x] %>"></img>
+		<img src = "<%= @image %>"></img><img src = "<%= @final[x] %>"></img><%= form_tag("/search/nfl", method: "POST") do %><%= submit_tag("Save")%><% end %>
 	<% end %>
 <% end %>

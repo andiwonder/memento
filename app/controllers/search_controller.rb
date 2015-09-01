@@ -229,6 +229,10 @@ class SearchController < ApplicationController
 
 	end
 
+	def mlb_save
+		#Event.create({})
+	end
+
 	def game
 	
 	end#game end
