@@ -50,6 +50,8 @@ class SearchController < ApplicationController
 		@event_date = []
 		@id = []
 		@away_image =[]
+		@location = []
+		@description = []
 
 		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=dkqbasagrb829fr3z9kx2yz8")
 			nfl["weeks"].each do |x|
@@ -61,6 +63,7 @@ class SearchController < ApplicationController
 						puts event_date
 						if y["home"]["alias"] == params[:nfl]
 							description = "Vs The " + y["away"]["name"]
+							@description.push(description)
 							team = y["home"]["name"]
 							title = "The #{team} #{description}" + " At "+y["venue"]["name"]
 							@title.push(title)
@@ -68,8 +71,11 @@ class SearchController < ApplicationController
 							@id.push(id)
 							awayImg = y["away"]["alias"]
 							@away_image.push(awayImg)
+							location = y["venue"]["name"]
+							@location.push(location)
 						else
 							description = "At The " + y["home"]["name"]
+							@description.push(description)
 							team = y["away"]["name"]
 							title = "The #{team} #{description}" + " At "+y["venue"]["name"]
 							@title.push(title)
@@ -77,6 +83,8 @@ class SearchController < ApplicationController
 							@id.push(id)
 							awayImg = y["home"]["alias"]
 							@away_image.push(awayImg)
+							location = y["venue"]["name"]
+							@location.push(location)
 						end
 						puts description
 						puts title
@@ -240,8 +248,17 @@ class SearchController < ApplicationController
 	end
 
 	def mlb_save
-		Event.create(mlb_params)
-		redirect_to ('/search/mlb')
+		event = Event.create(sports_params)
+		user = User.find(session[:user_id])
+		user.events << event
+		redirect_to user_path(user)
+	end
+
+	def nfl_save
+		event = Event.create(sports_params)
+		user = User.find(session[:user_id])
+		user.events << event
+		redirect_to user_path(user)
 	end
 
 	def game
@@ -281,7 +298,7 @@ class SearchController < ApplicationController
 
 	private
 
-	def mlb_params
+	def sports_params
     params.permit(:title, :description, :logo, :event_date, :event_type, :location, :unique_id) 
   end
 

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/search/gameresults' => 'search#game_search'
   post '/search/gameresults' => 'search#game_add'
   post '/search/mlb_save' => 'search#mlb_save'
+   post '/search/nfl_save' => 'search#nfl_save'
   resources :users
   
 end
