@@ -7,9 +7,9 @@ class SearchController < ApplicationController
 		day 	= sprintf '%02d', today.day
 
 		movies = HTTParty.get("https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" +
-			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+			year + "-" + month + "-" + day + "?api_key=62a7eb6c7255fd75d2d7a0ce222f8896"
 		)
-		@movies = movies.results
+		@movies = JSON.parse(movies).results
 	end
 
 	def tv
@@ -19,9 +19,9 @@ class SearchController < ApplicationController
 		day 	= sprintf '%02d', today.day
 
 		tv = HTTParty.get("https://api.themoviedb.org/3/discover/tv?air_date.gte=" +
-			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+			year + "-" + month + "-" + day + "?api_key=62a7eb6c7255fd75d2d7a0ce222f8896"
 		)
-		@tv = tv.results
+		@tv = JSON.parse(tv).results
 	end
 
 	def nfl
@@ -139,7 +139,7 @@ class SearchController < ApplicationController
 	def mlb
 		if logged_in?
 			@teams = []
-			mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=" ENV[mlb])
+			mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=#{ENV[mlb]}")
 			mlb["league"]["season"]["games"].each do |x|
 				@teams.push(x["home"]["abbr"])
 			end
