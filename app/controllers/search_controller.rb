@@ -9,7 +9,7 @@ class SearchController < ApplicationController
 		movies = HTTParty.get("https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" +
 			year + "-" + month + "-" + day + "?api_key=62a7eb6c7255fd75d2d7a0ce222f8896"
 		)
-		@movies = movies.results
+		@movies = JSON.parse(movies).results
 	end
 
 	def tv
@@ -21,7 +21,7 @@ class SearchController < ApplicationController
 		tv = HTTParty.get("https://api.themoviedb.org/3/discover/tv?air_date.gte=" +
 			year + "-" + month + "-" + day + "?api_key=62a7eb6c7255fd75d2d7a0ce222f8896"
 		)
-		@tv = tv.results
+		@tv = JSON.parse(tv).results
 	end
 
 	def nfl
