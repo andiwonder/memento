@@ -4,8 +4,6 @@
   <title> Memento </title>
 
   <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-
-  <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.6.0/pure-min.css">
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -13,11 +11,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class = "header">
-  <% if session[:user_id] %>
-    <%= link_to("log out", "/sessions", method: :delete) %>
-  <% end %>
-</div>
+
+	<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="">Memento</a>
+
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Search</a></li>
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Log In</a></li>
+        </ul>
+    </div>
+	</div>
+
 
 <%= yield %>
 
