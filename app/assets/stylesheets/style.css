@@ -58,6 +58,11 @@
 #list {
 	display: none;
 }
+
+.matchup_image {
+	height: 80px;
+	width: 80px;
+}
 /*____________________________________david*/
 
 #game_img{

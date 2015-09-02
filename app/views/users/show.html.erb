@@ -59,7 +59,7 @@ $(document).ready(function(){
   </script>
 </head>
 
-<body>
+<body style = "padding-left: 10px;">
 
   <h1> Hey there, <%= @current_user.email %>! How about an awesome event? </h1>
 
@@ -71,7 +71,11 @@ $(document).ready(function(){
   <div id="list">
     <% @events.each do |event| %>
     <h3> <%= event.title %> </h3>
+    <% if event.event_type == "sports" %>
+    <h3> <%= event.event_date %> </h3> 
+    <% else  %>
     <h3> <%= event.description %> </h3>
+    <% end %>
   <% end %>
   </div>
 
