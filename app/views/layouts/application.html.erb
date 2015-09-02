@@ -20,7 +20,7 @@
         <a class="pure-menu-heading" href="/">Memento</a>
 
         <ul class="pure-menu-list">
-        		<li class="pure-menu-item pure-menu-selected"><a href="/users/<%= session[:user_id] %>" class="pure-menu-link">Events</a></li>
+        		<li class="pure-menu-item pure-menu-selected"><a <% if session[:user_id] %>href="/users/<%= session[:user_id] %>" <% else %>  href = "/" <% end %> class="pure-menu-link">Events</a></li>
             <li class="pure-menu-item">Search</li>
             <li class="pure-menu-item pure-menu-selected"><a href="/search/nfl" class="pure-menu-link">NFL</a></li>
             <li class="pure-menu-item pure-menu-selected"><a href="/search/mlb" class="pure-menu-link">MLB</a></li>
@@ -28,9 +28,9 @@
             <li class="pure-menu-item pure-menu-selected"><a href="/search/game" class="pure-menu-link">Video Games</a></li>  
 
 
-						<% if session[:user_id] != nil %>
+						<% if session[:user_id] %>
             <li class="pure-menu-item pure-menu-selected"><%= link_to "Logout", sessions_path, method: :destroy %></br></li>
-						<% elsif session[:user_id] == nil %>
+						<% elsif session[:user_id] %>
             <li class="pure-menu-item"><a href="/sessions/new" class="pure-menu-link">Log In</a></li>
             <% end %>
 
