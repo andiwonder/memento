@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/search/music' => 'search#music_search'
   get '/search/music_save' => 'search#music_show'
   post '/search/music_save' => 'search#music_save'
+  get '/logout' => 'sessions#destroy'
 
 
 

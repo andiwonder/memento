@@ -29,7 +29,7 @@
 
 
 						<% if session[:user_id] %>
-            <li class="pure-menu-item pure-menu-selected"><%= link_to "Logout", sessions_path, method: :destroy %></br></li>
+            <li class="pure-menu-item"><a href="/logout" class = "pure-menu-link">Log Out</a></li>
 						<% else %>
             <li class="pure-menu-item"><a href="/sessions/new" class="pure-menu-link">Log In</a></li>
             <% end %>
