@@ -14,3 +14,22 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).ready(function(){
+
+	$('#cal_button').click(function(){
+		$('#calendar').toggle('slow');
+		$('#list').toggle('slow');
+	})
+
+	$('#list_button').click(function(){
+		$('#calendar').toggle('slow');
+		$('#list').toggle('slow');
+	})
+
+
+	$('#calendar').fullCalendar({
+        // put your options and callbacks here
+    })	
+});

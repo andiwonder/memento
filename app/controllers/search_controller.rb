@@ -7,7 +7,7 @@ class SearchController < ApplicationController
 		day 	= sprintf '%02d', today.day
 
 		movies = HTTParty.get("https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=" +
-			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+			year + "-" + month + "-" + day + "?api_key=62a7eb6c7255fd75d2d7a0ce222f8896"
 		)
 		@movies = movies.results
 	end
@@ -19,7 +19,7 @@ class SearchController < ApplicationController
 		day 	= sprintf '%02d', today.day
 
 		tv = HTTParty.get("https://api.themoviedb.org/3/discover/tv?air_date.gte=" +
-			year + "-" + month + "-" + day + "?api_key=" + ENV[TMDB_API_KEY]
+			year + "-" + month + "-" + day + "?api_key=62a7eb6c7255fd75d2d7a0ce222f8896"
 		)
 		@tv = tv.results
 	end
