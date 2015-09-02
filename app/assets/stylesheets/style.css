@@ -47,3 +47,13 @@
 .login_form {
 	text-align: center;
 }
+
+
+#calender {
+	width: 600px;
+}
+
+#list {
+	display: none;
+}
+
