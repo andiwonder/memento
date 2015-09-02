@@ -385,7 +385,7 @@ class SearchController < ApplicationController
 		unless user.events.find_by(unique_id: event[:unique_id])
 			user.events << event
 		end
-    	redirect_to ('/search/music')
+		redirect_to user_path(user)
   end
 
 
