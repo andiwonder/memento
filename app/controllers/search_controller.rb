@@ -345,6 +345,40 @@ class SearchController < ApplicationController
    self.event_save
     # redirect_to '/search/game'  
   end#game_add end
+
+
+  def music_search
+  end
+
+  def music_show
+  	  name = params['artist'].split(' ').join('+')
+      response = HTTParty.get('http://api.eventful.com/json/events/search?keywords=' + name + '&location=new+york&image_sizes=large&sort_order=popularity&app_key=smgM7gtT4TD53Spx')
+      @data = JSON.parse(response)
+      puts "yooooooooooooooooo"
+  end
+
+
+
+  def music_save
+
+  		event = Event.new(event_params)
+		if Event.find_by(unique_id: event[:unique_id])
+			event = Event.find_by(unique_id: event[:unique_id])
+		else
+			event_params = {title: params[:title], description: params[:description], event_date: params[:start_time], event_type: "music", location: params[:venue_name], unique_id: params[:unique_id]}
+			event = Event.create(event_params)
+		end
+		user = User.find(session[:user_id])
+
+		unless user.events.find_by(unique_id: event[:unique_id])
+			user.events << event
+		end
+    	redirect_to ('/search/music')
+  end
+
+
+
+
   
 	private
 

@@ -36,6 +36,19 @@
 
 $(document).ready(function(){
 
+  $('#cal_button').click(function(){
+    $('#calendar').toggle('slow');
+    $('#list').toggle('slow');
+  });
+
+
+
+  $('#list_button').click(function(){
+    $('#calendar').toggle('slow');
+    $('#list').toggle('slow');
+  });
+
+
   console.log(myarr);
   $('#calendar').fullCalendar({
            events: myarr
