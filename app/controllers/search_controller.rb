@@ -346,20 +346,30 @@ class SearchController < ApplicationController
 
 
   def music_search
+  	if logged_in?
+  		render :music_search
+  	else
+  		redirect_to root_path
+  	end
+
   end
 
   def music_show
+  	if logged_in?
   	  name = params['artist'].split(' ').join('+')
       response = HTTParty.get('http://api.eventful.com/json/events/search?keywords=' + name + '&location=new+york&image_sizes=large&sort_order=popularity&app_key=smgM7gtT4TD53Spx')
       @data = JSON.parse(response)
       puts "yooooooooooooooooo"
+     else
+     	redirect_to root_path
+     end
   end
 
 
 
   def music_save
 
-  		event = Event.new(event_params)
+  	event = Event.new(event_params)
 		if Event.find_by(unique_id: event[:unique_id])
 			event = Event.find_by(unique_id: event[:unique_id])
 		else
