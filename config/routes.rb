@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   post '/search/nfl_save' => 'search#event_save'
   post '/search/mlb_save' => 'search#mlb_save'
   post '/search/nfl_save' => 'search#nfl_save'
+  get '/search/music' => 'search#music_search'
+  get '/search/music_save' => 'search#music_show'
+  post '/search/music_save' => 'search#music_save'
+
+
 
   get '/search/movies' => 'search#movies'
   get '/search/tv' => 'search#tv'

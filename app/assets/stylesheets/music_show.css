@@ -1,0 +1,39 @@
+.event {
+	width: 500px;
+	height: 500px;
+	border: 5px solid black;
+	padding: 0;
+	margin: 0;
+}
+.logo_container{
+	width: 45%;
+	height: 250px;
+	border: 5px solid blue;
+	display: inline-block;
+}
+.logo {
+	height: 200px;
+	width: auto;
+}
+.date_container {
+	width: 45%;
+	height: 250px;
+	border: 5px solid blue;
+	display: inline-block;
+
+}
+.event_info {
+	width: 90%;
+	height: 150px;
+	border: 5px solid red;
+}
+.all_events_container{
+	display: inline-block;
+}
+form {
+	display: inline-block;
+	margin-bottom: 50px;
+}
+.bio{
+	line-height: 200%;
+}
