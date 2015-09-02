@@ -5,14 +5,14 @@
   <title> New User </title>
 </head>
 <body>
-  <h1> Thanks for signing up! You're well on your way to awesome events. </h1>
+</br><div class = "login_form">
+  <h1> Sign up below! </h1>
 
-  <%= form_for @user do |f| %>
-    Enter your email
-    <%= f.text_field :email %>
-    Enter a password
-    <%= f.password_field :password %>
-    <%= f.submit "create account" %>
-  <% end %>
+  <%= form_tag("/users", method: "POST", class: "pure-form") do %>
+      <%= email_field_tag :email, "Email" %>
+      <%= password_field_tag :password, "Password" %>
+      <%= submit_tag "Create account" %>
+    <% end %>
+  </div>
 </body>
 </html>
