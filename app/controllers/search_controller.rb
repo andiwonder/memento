@@ -297,11 +297,7 @@ class SearchController < ApplicationController
 
 	def game_search
     @search = params[:name]
-    result = HTTParty.get('http://www.giantbomb.com/api/search/?api_key=9a1589bbea869535bbf2840478d5656d7d53eb5c&format=json&query=%22'+@search+'%22&resources=game',
-    headers:{
-        "X-Mashape-Key" => "fkL4Ay2aSUmshDSItLpIVOVLIs4Op1nS8LLjsnes8Ehvq9m825",
-        "Accept" => "text/plain"
-        })
+    result = HTTParty.get('http://www.giantbomb.com/api/search/?api_key=9a1589bbea869535bbf2840478d5656d7d53eb5c&format=json&query=%22'+@search+'%22&resources=game')
     array = []
     list = result["results"]
     list.each do |x|
