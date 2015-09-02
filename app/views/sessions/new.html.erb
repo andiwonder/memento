@@ -1,10 +1,8 @@
-<div class = "login_form">
+</br><div class = "login_form">
   <h1> Log in to check your events! </h1>
     <%= form_tag("/sessions", method: "POST", class: "pure-form") do %>
       <%= email_field_tag :email, "Email" %>
       <%= password_field_tag :password, "Password" %>
       <%= submit_tag "Login" %>
     <% end %>
-  </body>
-  </html>
 </div>

@@ -341,8 +341,20 @@ class SearchController < ApplicationController
     b = array.pop
     date = array.unshift(b).join("-").to_date
 
-   event_params = ({title: params[:title], description: params[:description], event_date: date, logo: params[:pic], event_type: "video game", unique_id: params[:unique_id]})
-   self.event_save
+   
+   event = Event.new(event_params)
+		if Event.find_by(unique_id: event[:unique_id])
+			event = Event.find_by(unique_id: event[:unique_id])
+		else
+			event_params = ({title: params[:title], description: params[:description], event_date: date, logo: params[:pic], event_type: "video game", unique_id: params[:unique_id]})
+			event = Event.create(event_params)
+		end
+		user = User.find(session[:user_id])
+
+		unless user.events.find_by(unique_id: event[:unique_id])
+			user.events << event
+		end
+		redirect_to user_path(user)
     # redirect_to '/search/game'  
   end#game_add end
 
