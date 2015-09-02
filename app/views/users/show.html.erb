@@ -5,6 +5,45 @@
   <title> Your Events </title>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+
+  <script type="text/javascript">
+
+  var myarr = [];
+  var color_show = "red";
+
+  <% @events.each do |event| %>
+    var y = "<%= event.title %>"
+    var z = "<%= event.description %>"
+    var x = "<%= event.event_date %>"
+    var u = "<%= event.event_type %>"
+
+
+    if (u === "video game"){
+      color_show = "green"
+    }
+    else if (u === "sports"){
+      color_show = "red"
+    }
+    else if (u === "music"){
+      color_show = "yellow"
+    }
+
+
+    var tempobj = {title: y, description : z, start: x, allDay : false, color: color_show};
+    myarr.push(tempobj)
+  <% end %>
+
+
+$(document).ready(function(){
+
+  console.log(myarr);
+  $('#calendar').fullCalendar({
+           events: myarr
+    });
+});
+
+
+  </script>
 </head>
 
 <body>
