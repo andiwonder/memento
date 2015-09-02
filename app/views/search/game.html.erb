@@ -4,3 +4,8 @@
 <input type='text' name='name' placeholder='Enter game name'>
 <button>Search</button>
 <end>
+
+<% @games.each do |game| %>
+	<p><%=game["name"]%></p>
+	<img src='<%=game["image"]["small_url"]%>'>
+<% end %>
