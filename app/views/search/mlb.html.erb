@@ -16,7 +16,7 @@
 		<% for x in 0.. @title.length-1 do %>
 			
 			<div class = "each_result">
-<!-- 				<a href = "/search/mlb/<%= @id[x] %>">  --><li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li><!-- </a> -->
+<!-- 				<a href = "/search/mlb/<%= @id[x] %>">  --><li> <%= @title[x] %> <%= @event_date[x] %> </li><!-- </a> -->
 				<img src = "<%= @image %>" class = "matchup_image"></img ><img src = "<%= @final[x] %>" class = "matchup_image"></img>
 				<%= form_tag("/search/mlb_save", method: "POST") do %>
 				<%= hidden_field_tag :title, @title[x] %>

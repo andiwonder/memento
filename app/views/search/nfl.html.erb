@@ -17,7 +17,7 @@
 
 	<% if @title %>
 		<% for x in 0.. @title.length-1 do %>
-<!-- 			<a href = "/search/nfl/<%= @id[x] %>"> --> <li style = "font-size: 10px"> <%= @title[x] %> <%= @event_date[x] %> </li><!-- </a> -->
+<!-- 			<a href = "/search/nfl/<%= @id[x] %>"> --> <li> <%= @title[x] %> <%= @event_date[x] %> </li><!-- </a> -->
 			<img src = "<%= @image %>" style = "	margin: 10px"></img><img src = "<%= @final[x] %>" style = "	margin: 10px"></img>
 			<%= form_tag("/search/nfl_save", method: "POST") do %>
 			<%= hidden_field_tag :title, @title[x] %>
