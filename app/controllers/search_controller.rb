@@ -26,7 +26,7 @@ class SearchController < ApplicationController
 
 	def nfl
 		if logged_in?
-			nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=" + ENV[nfl] )
+			nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=#{ENV[nfl]}")
 			@button = []
 			for x in 0.. nfl["weeks"][0]["games"].length-1 do
 				@button.push(nfl["weeks"][0]["games"][x]["home"]["alias"])
@@ -80,7 +80,7 @@ class SearchController < ApplicationController
 		@location = []
 		@description = []
 
-		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=" + ENV[nfl])
+		nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=#{ENV[nfl]}")
 			nfl["weeks"].each do |x|
 				x["games"].each do |y|
 					if y["home"]["alias"] == params[:nfl] || y["away"]["alias"] == params[:nfl]
@@ -191,7 +191,7 @@ class SearchController < ApplicationController
 		@location = []
 		@description = []
 
-		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key="+ENV[mlb])
+		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=#{ENV[mlb]}")
 		mlb["league"]["season"]["games"].each do |x|
 			if (x["home"]["abbr"] == params[:mlb] && x["status"] == "scheduled") || (x["away"]["abbr"] == params[:mlb] && x["status"] == "scheduled")
 				event_date = x["scheduled"]
@@ -252,7 +252,7 @@ class SearchController < ApplicationController
 
 	def mlb_show
 		id = params[:id]
-		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=" + ENV[mlb])
+		mlb = HTTParty.get("http://api.sportradar.us/mlb-t5/games/2015/reg/schedule.json?api_key=#{ENV[mlb]}")
 		mlb["league"]["season"]["games"].each do |x|
 			if x["id"] == id
 				@event_date = x["scheduled"]
@@ -264,7 +264,7 @@ class SearchController < ApplicationController
 
 	def nfl_show
 		id = params[:id]
-			nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=" + ENV[nfl])
+			nfl = HTTParty.get("https://api.sportradar.us/nfl-ot1/games/2015/reg/schedule.json?api_key=#{ENV[nfl]}")
 			nfl["weeks"].each do |x|
 				x["games"].each do |y|
 					if y["id"] == id
