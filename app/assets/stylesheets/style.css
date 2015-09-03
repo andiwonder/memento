@@ -69,5 +69,45 @@
 	height: 300px;
 }
 
+#game_img{
+    height: 300px;
+}
+
+.game{
+    background-image: url("http://images.alphacoders.com/282/28213.jpg");
+    background-size: cover;
+}
+
+#gamebox{
+    margin-left:70px;
+}
+
+#head{
+    text-align: center;
+}
+
+#mario{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: 10vw;
+}
+
+#megaman{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: auto;
+    width: 10vw;
+}
+
+#pikachu{
+    position: fixed;
+    bottom: 0;
+    right:0;
+    height: auto;
+    width: 15vw;
+}
 
 /*_____________________________________*/
