@@ -17,7 +17,22 @@
                     $(".fireball_vis").animate({left:"+=1300"}, 4000)
                     setTimeout(function(){
                     $("#mario").attr("src", "http://searchingforsuperwomen.com/wp-content/uploads/2013/09/dead-mario.png")
-                    }, 3000);                                
+                    }, 3500);        
+                    setTimeout(function(){
+                        $(".mushroom_invis").attr("class", "mushroom_vis")
+                        $(".mushroom_vis").animate({bottom:"-=200"}, 2000)
+                                                            .animate({left:"+=900"}, 3500)
+                    }, 4000);        
+                    setTimeout(function(){
+
+                        $("#mario").attr("src", "http://vignette2.wikia.nocookie.net/fantendo/images/7/72/Buff_mario.jpg/revision/latest?cb=20150201220908")
+                    }, 8500);    
+                    setTimeout(function(){
+                        $("#megaman").attr("src", "http://40.media.tumblr.com/1bc11ebe8f030952c96887d9d8d5f0a1/tumblr_meujd6nCIy1r413h3o1_400.jpg")
+                    }, 10000);        
+                    setTimeout(function(){
+                        $("#megaman").animate({left:"-=200"}, 8000)
+                    }, 12000);
                 };
             });
 
@@ -48,7 +63,7 @@
                 <img id="mario" src="http://static.planetminecraft.com/files/resource_media/screenshot/1236/mario_3501733.jpg">
                 <img id="megaman" src="http://piq.codeus.net/static/media/userpics/piq_120715_400x400.png"> 
                 <img class="fireball_invis" src="https://lh5.ggpht.com/Lrozt-howCiaHiWIdAuBhIiKBLVXTvjecpIPLqQfRMRGTkx-C3j0ventLSVgVluvoKKY=w300">
-                <img class="fireball_invis2" src="https://lh5.ggpht.com/Lrozt-howCiaHiWIdAuBhIiKBLVXTvjecpIPLqQfRMRGTkx-C3j0ventLSVgVluvoKKY=w300">
+                <img class="mushroom_invis" src="http://piq.codeus.net/static/media/userpics/piq_307048_400x400.png">
             </div>
 
         </div>

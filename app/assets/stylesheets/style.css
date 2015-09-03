@@ -123,6 +123,24 @@
     opacity: 0;
 
 }
+
+.mushroom_vis{
+    position: fixed;
+    bottom: 200px;
+    left: 580px;
+    height: auto;
+    width: 10vw;
+}
+
+.mushroom_invis{
+    position: fixed;
+    bottom: 200;
+    left: 580px;
+    height: auto;
+    width: 10vw;
+    opacity: 0;
+
+}
 /*_____________________________________*/
 
 .music_search_page {
