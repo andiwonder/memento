@@ -1,3 +1,19 @@
+<head>
+    <script type="text/javascript">
+        $("document").ready(function(){
+            $("button").hover(function(){
+                $("#pikachu").attr("src", "http://vignette3.wikia.nocookie.net/deathbattlefanon/images/0/0a/PikachuVictory.png/revision/latest?cb=20150402190248")
+                    }, function(){
+                $("#pikachu").attr("src", "http://img2.wikia.nocookie.net/__cb20140410200723/pokemon/images/archive/1/16/20150102074354!025Pikachu_OS_anime_10.png")
+            });
+
+        });
+    </script>
+
+</head>
+
+
+
 <body class="game">        
     <br><br>
         <h1 id="head"> Search results for <%= @search %> </h1>
