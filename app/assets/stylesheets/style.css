@@ -66,10 +66,6 @@
 /*____________________________________david*/
 
 #game_img{
-	height: 300px;
-}
-
-#game_img{
     height: 300px;
 }
 
@@ -89,7 +85,7 @@
 #mario{
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
     height: auto;
     width: 10vw;
 }
@@ -97,7 +93,7 @@
 #megaman{
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 0;
     height: auto;
     width: 10vw;
 }
@@ -110,4 +106,21 @@
     width: 15vw;
 }
 
+.fireball_vis{
+    position: fixed;
+    bottom: 0;
+    left: 150px;
+    height: auto;
+    width: 10vw;
+}
+
+.fireball_invis{
+    position: fixed;
+    bottom: 0;
+    left: 150px;
+    height: auto;
+    width: 10vw;
+    opacity: 0;
+
+}
 /*_____________________________________*/

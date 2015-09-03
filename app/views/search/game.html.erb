@@ -8,11 +8,24 @@
                 $("#mario").attr("src", "http://static.planetminecraft.com/files/resource_media/screenshot/1236/mario_3501733.jpg")
             });
 
-            $("#megaman").hover(function(){
-                $("#megaman").attr("src", "http://1.bp.blogspot.com/_R9mGpYn2HUQ/SaHMSr07BvI/AAAAAAAAAFs/k9iPbqxGN04/s1600/mega%2Bman%2Bpixel")
-                    }, function(){
-                $("#megaman").attr("src", "http://piq.codeus.net/static/media/userpics/piq_120715_400x400.png")
+            $("body").keydown(function(e){
+                if(e.keyCode == 97){
+                    $("#megaman").attr("src", "http://1.bp.blogspot.com/_R9mGpYn2HUQ/SaHMSr07BvI/AAAAAAAAAFs/k9iPbqxGN04/s1600/mega%2Bman%2Bpixel")
+                }else if(e.keyCode == 32){
+                    $("#megaman").attr("src", "http://images.nintendolife.com/news/2008/09/mega_man_9_challenge_list/large.jpg");
+                    $(".fireball_invis").attr("class", "fireball_vis")
+                    $(".fireball_vis").animate({left:"+=1300"}, 4000)
+                    setTimeout(function(){
+                    $("#mario").attr("src", "http://searchingforsuperwomen.com/wp-content/uploads/2013/09/dead-mario.png")
+                    }, 3000);                                
+                };
             });
+
+            $("body").keyup(function(){
+                $("#megaman").attr("src", "http://piq.codeus.net/static/media/userpics/piq_120715_400x400.png")
+                // $(".fireball_vis").attr("class", "fireball_invis")
+            });
+                
 
         });
     </script>
@@ -33,7 +46,9 @@
             </div>
             <div class="pure-u-1-1">
                 <img id="mario" src="http://static.planetminecraft.com/files/resource_media/screenshot/1236/mario_3501733.jpg">
-                <img id="megaman" src="http://piq.codeus.net/static/media/userpics/piq_120715_400x400.png"
+                <img id="megaman" src="http://piq.codeus.net/static/media/userpics/piq_120715_400x400.png"> 
+                <img class="fireball_invis" src="https://lh5.ggpht.com/Lrozt-howCiaHiWIdAuBhIiKBLVXTvjecpIPLqQfRMRGTkx-C3j0ventLSVgVluvoKKY=w300">
+                <img class="fireball_invis2" src="https://lh5.ggpht.com/Lrozt-howCiaHiWIdAuBhIiKBLVXTvjecpIPLqQfRMRGTkx-C3j0ventLSVgVluvoKKY=w300">
             </div>
 
         </div>
